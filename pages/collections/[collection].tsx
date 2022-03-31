@@ -39,7 +39,7 @@ function Collection() {
           />
           <h1 className="text-4xl font-bold">Collection Name | NFT Drop</h1>
           <p>x / xx NFT's claimed</p>
-          <button className="animate-ease-in-out absolute bottom-2 h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
+          <button className="animate-bounce absolute bottom-2 h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
             Mint
           </button>
         </div>
