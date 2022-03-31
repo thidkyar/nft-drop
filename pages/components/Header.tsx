@@ -1,10 +1,34 @@
+import { useAddress, useDisconnect, useMetamask } from '@thirdweb-dev/react'
+import Link from 'next/link'
+
 function Header() {
+  const connectWithMetamask = useMetamask()
+  const address = useAddress()
+  const disconnectMetamask = useDisconnect()
+
   return (
-    <header className="flex items-center justify-between sticky">
-      <h1 className="w-52 cursor-pointer font-bold">nft drop.</h1>
-      <button className="rounded-2xl border-2 bg-gradient-to-br from-purple-600 to-purple-900 w-20 h-10 text-white animate-ease-in-out">
-        Login
-      </button>
+    <header className="sticky top-0 z-50 flex items-center justify-between">
+      <h1 className="animate-ease-in-out w-52 cursor-pointer font-bold">
+        <Link href="/">
+          <a>nft drop.</a>
+        </Link>
+      </h1>
+      <div className="space-x-2">
+        <Link href="/collections/random">
+          <button className="animate-ease-in-out h-10 rounded-2xl border-2 bg-gradient-to-br from-cyan-900 to-purple-900 px-4 text-white">
+            Random Collection
+          </button>
+        </Link>
+
+        <button
+          onClick={() => {
+            address ? disconnectMetamask() : connectWithMetamask()
+          }}
+          className="animate-ease-in-out h-10 rounded-2xl border-2 bg-gradient-to-br from-purple-600 to-purple-900 px-4 text-white"
+        >
+          {address ? 'Logout' : 'Login'}
+        </button>
+      </div>
     </header>
   )
 }
