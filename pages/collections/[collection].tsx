@@ -13,7 +13,7 @@ function Collection() {
   return (
     <div className="flex h-screen flex-col lg:grid lg:grid-cols-10">
       {/* left side */}
-      <div className="animate-slide-in-down lg:animate-slide-in-right bg-gradient-to-br from-cyan-900 to-purple-900 shadow-2xl lg:col-span-4">
+      <div className="animate-slide-in-down bg-gradient-to-br from-cyan-900 to-purple-900 shadow-2xl lg:col-span-4 lg:animate-slide-in-right">
         {/* update with dynamic image*/}
         <div className="flex flex-col items-center justify-center py-4 lg:min-h-screen">
           <div className="animate-ease-in-out rounded-xl bg-gradient-to-br from-yellow-500 to-rose-500 p-2">
@@ -33,7 +33,6 @@ function Collection() {
       {/* right side */}
       <div
         className={`flex flex-1 flex-col p-8 shadow-inner lg:col-span-6 ${customAnimation}`}
-        
       >
         {/* header */}
         <div className="relative">
@@ -42,7 +41,7 @@ function Collection() {
 
         <hr className="my-2 border" />
 
-        <div className="relative flex flex-1 flex-col items-center space-y-6 text-center sm:mt-10 justify-center">
+        <div className="relative flex flex-1 flex-col items-center justify-center space-y-6 text-center sm:mt-10">
           {/* collection image */}
           <img
             className="w-80 object-cover lg:h-40"
