@@ -1,7 +1,14 @@
+import { GetServerSideProps } from 'next'
 import { useState, useEffect } from 'react'
+import { sanityClient, urlFor } from '../../sanity'
+import { Collection } from '../../typings'
 import Header from '../components/Header'
 
-function Collection() {
+interface Props {
+  collection: Collection
+}
+
+function Collection({ collection }: Props) {
   const [customAnimation, setCustomAnimation] = useState('hidden')
 
   useEffect(() => {
@@ -19,13 +26,15 @@ function Collection() {
           <div className="animate-ease-in-out rounded-xl bg-gradient-to-br from-yellow-500 to-rose-500 p-2">
             <img
               className="w-44 rounded-xl object-cover"
-              src="https://c.tenor.com/RmBLoLsN40EAAAAd/bored-ape.gif"
+              src={urlFor(collection.previewImage).url()}
               alt=""
             />
           </div>
           <div className="p-5 text-center text-white">
-            <h1 className="text-4xl font-bold">Collection Name</h1>
-            <h2 className="text-xl text-gray-300">Collection Description</h2>
+            <h1 className="text-4xl font-bold">
+              {collection.nftCollectionName}
+            </h1>
+            <h2 className="text-xl text-gray-300">{collection.description}</h2>
           </div>
         </div>
       </div>
@@ -42,14 +51,15 @@ function Collection() {
         <hr className="my-2 border" />
 
         <div className="relative flex flex-1 flex-col items-center justify-center space-y-6 text-center sm:mt-10">
-          {/* collection image */}
           <img
             className="w-80 object-cover lg:h-40"
-            src="https://sothebys-md.brightspotcdn.com/d8/51/750fa3b846a1a2427aac73a7bf35/apes-collage-new.jpg"
+            src={urlFor(collection.mainImage).url()}
             alt=""
           />
-          <h1 className="text-4xl font-bold">Collection Name | NFT Drop</h1>
+          <h1 className="text-4xl font-bold">{collection.title}</h1>
           <p>x / xx NFT's claimed</p>
+        </div>
+        <div className="mt-10">
           <button className="h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
             Mint
           </button>
@@ -60,3 +70,46 @@ function Collection() {
 }
 
 export default Collection
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const query = `*[_type == "collection" && slug.current == $collection][0]{
+    _id,
+    title,
+      address,
+      description,
+      nftCollectionName,
+      mainImage {
+      asset
+    },
+    previewImage {
+      asset
+    },
+    slug {
+      current
+    },
+    creator->{
+      _id,
+      name,
+      address,
+      slug {
+      current
+    },
+    },
+    }`
+
+  const collection = await sanityClient.fetch(query, {
+    collection: params?.collection,
+  })
+
+  if (!collection) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: {
+      collection,
+    },
+  }
+}
