@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <title>NFT Drops</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="p-8">
+      <div className="p-8 max-w-screen-2xl mx-auto">
         <Header />
         <hr className="my-2 border" />
         <h1>Homepage</h1>

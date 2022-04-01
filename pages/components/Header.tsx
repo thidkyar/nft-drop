@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between">
-      <h1 className="animate-ease-in-out w-52 cursor-pointer font-bold">
+      <h1 className="animate-ease-in-out cursor-pointer font-bold">
         <Link href="/">
           <a>nft drop.</a>
         </Link>
