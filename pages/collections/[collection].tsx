@@ -19,7 +19,7 @@ function Collection() {
           <div className="animate-ease-in-out rounded-xl bg-gradient-to-br from-yellow-500 to-rose-500 p-2">
             <img
               className="w-44 rounded-xl object-cover"
-              src="https://observer.com/wp-content/uploads/sites/2/2021/08/Yuga-Labs-Bored-Ape-Yacht-Club-5812.jpg?quality=80"
+              src="https://c.tenor.com/RmBLoLsN40EAAAAd/bored-ape.gif"
               alt=""
             />
           </div>
