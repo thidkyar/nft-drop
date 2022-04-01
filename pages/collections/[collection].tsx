@@ -33,6 +33,7 @@ function Collection() {
       {/* right side */}
       <div
         className={`flex flex-1 flex-col p-8 shadow-inner lg:col-span-6 ${customAnimation}`}
+        
       >
         {/* header */}
         <div className="relative">
@@ -41,7 +42,7 @@ function Collection() {
 
         <hr className="my-2 border" />
 
-        <div className="relative flex flex-1 flex-col items-center space-y-6 text-center sm:mt-10 lg:justify-center">
+        <div className="relative flex flex-1 flex-col items-center space-y-6 text-center sm:mt-10 justify-center">
           {/* collection image */}
           <img
             className="w-80 object-cover lg:h-40"
@@ -50,7 +51,7 @@ function Collection() {
           />
           <h1 className="text-4xl font-bold">Collection Name | NFT Drop</h1>
           <p>x / xx NFT's claimed</p>
-          <button className="absolute bottom-2 h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
+          <button className="h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
             Mint
           </button>
         </div>
