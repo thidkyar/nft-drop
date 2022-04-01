@@ -16,7 +16,7 @@ function Header() {
       <div className="space-x-2">
         <Link href="/collections/random">
           <button className="animate-ease-in-out h-10 rounded-2xl border-2 bg-gradient-to-br from-cyan-900 to-purple-900 px-4 text-white">
-            Random Collection
+            Collection
           </button>
         </Link>
 

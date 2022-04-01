@@ -24,10 +24,19 @@ module.exports = {
             transform: 'translateX(0)',
           }
         },
+        'slide-in-down': {
+          '0%': {
+            transform: 'translateY(-100%)',
+          },
+          '100%': {
+            transform: 'translateY(0)',
+          }
+        },
       },
       animation: {
         'fade-in-down': 'fade-in-down 1s ease-in',
         'slide-in-right': 'slide-in-right 1s ease-in',
+        'slide-in-down': 'slide-in-down 1s ease-in',
       },
     },
   },

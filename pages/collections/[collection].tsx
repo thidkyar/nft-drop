@@ -13,7 +13,7 @@ function Collection() {
   return (
     <div className="flex h-screen flex-col lg:grid lg:grid-cols-10">
       {/* left side */}
-      <div className="animate-slide-in-right bg-gradient-to-br from-cyan-900 to-purple-900 shadow-2xl lg:col-span-4">
+      <div className="animate-slide-in-down lg:animate-slide-in-right bg-gradient-to-br from-cyan-900 to-purple-900 shadow-2xl lg:col-span-4">
         {/* update with dynamic image*/}
         <div className="flex flex-col items-center justify-center py-4 lg:min-h-screen">
           <div className="animate-ease-in-out rounded-xl bg-gradient-to-br from-yellow-500 to-rose-500 p-2">
@@ -50,7 +50,7 @@ function Collection() {
           />
           <h1 className="text-4xl font-bold">Collection Name | NFT Drop</h1>
           <p>x / xx NFT's claimed</p>
-          <button className="absolute bottom-2 h-16 w-full animate-bounce rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
+          <button className="absolute bottom-2 h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
             Mint
           </button>
         </div>
