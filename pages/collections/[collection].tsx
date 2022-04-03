@@ -1,8 +1,11 @@
+import { useNFTDrop, useAddress } from '@thirdweb-dev/react'
+import { BigNumber } from 'ethers'
 import { GetServerSideProps } from 'next'
 import { useState, useEffect } from 'react'
 import { sanityClient, urlFor } from '../../sanity'
 import { Collection } from '../../typings'
 import Header from '../components/Header'
+import toast, { Toaster } from 'react-hot-toast'
 
 interface Props {
   collection: Collection
@@ -10,12 +13,69 @@ interface Props {
 
 function Collection({ collection }: Props) {
   const [customAnimation, setCustomAnimation] = useState('hidden')
+  const [claimedSupply, setClaimedSupply] = useState<number>(0)
+  const [totalSupply, setTotalSupply] = useState<BigNumber>()
+  const [price, setPrice] = useState<String>()
+  const nftDrop = useNFTDrop(collection.address)
+  const [loading, setLoading] = useState<boolean>(false)
+  const address = useAddress()
 
   useEffect(() => {
     setTimeout(() => {
       setCustomAnimation('animate-fade-in-down')
     }, 1000)
-  })
+  }, [])
+
+  useEffect(() => {
+    if (!nftDrop) return
+
+    const fetchNFTDropData = async () => {
+      setLoading(true)
+      const claimed = await nftDrop?.getAllClaimed()
+      const total = await nftDrop?.totalSupply()
+      const claimConditions = await nftDrop?.claimConditions.getAll()
+      const price = claimConditions?.[0].currencyMetadata.displayValue
+      setPrice(price)
+      setClaimedSupply(claimed.length)
+      setTotalSupply(total)
+      setLoading(false)
+    }
+
+    fetchNFTDropData()
+  }, [nftDrop])
+
+  const handleMintButton = () => {
+    if (!nftDrop || !address) return
+
+    const quantity = 1
+    setLoading(true)
+    const notification = toast.loading('Minting...', {
+      position: "bottom-center"
+    })
+
+    nftDrop
+      .claimTo(address, quantity)
+      .then(async (transactionData) => {
+        const receipt = transactionData[0].receipt
+        const claimedTokenId = transactionData[0].id
+        const claimedNFT = await transactionData[0].data()
+        
+        toast.success("Succesfully minted!")
+        console.log(receipt)
+        console.log(claimedTokenId)
+        console.log(claimedNFT)
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error("Something went wrong", {
+          position: "bottom-center"
+        })
+      })
+      .finally(() => {
+        setLoading(false)
+        toast.dismiss(notification)
+      })
+  }
 
   return (
     <div className="flex h-screen flex-col lg:grid lg:grid-cols-10">
@@ -40,6 +100,7 @@ function Collection({ collection }: Props) {
       </div>
 
       {/* right side */}
+
       <div
         className={`flex flex-1 flex-col p-8 shadow-inner lg:col-span-6 ${customAnimation}`}
       >
@@ -57,14 +118,26 @@ function Collection({ collection }: Props) {
             alt=""
           />
           <h1 className="text-4xl font-bold">{collection.title}</h1>
-          <p>x / xx NFT's claimed</p>
+          <div className="rounded-lg border-2 border-black p-2">
+            {loading ? (
+              <p className="animate-pulse">LOADING SUPPLY COUNT...</p>
+            ) : (
+              <p className="text-green-500">
+                {claimedSupply}/{totalSupply?.toString()} NFT's claimed
+              </p>
+            )}
+          </div>
         </div>
         <div className="mt-10">
-          <button className="h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white">
-            Mint
+          <button
+            onClick={handleMintButton}
+            className="h-16 w-full rounded-2xl bg-gradient-to-br from-purple-600 to-purple-900 text-white"
+          >
+            Mint ({price} ETH)
           </button>
         </div>
       </div>
+      <Toaster />
     </div>
   )
 }

@@ -12,7 +12,7 @@ interface Props {
 
 const Home = ({ collections }: Props) => {
   return (
-    <div className="">
+    <div className="h-screen">
       <Head>
         <title>NFT Drops</title>
         <link rel="icon" href="/favicon.ico" />
@@ -20,12 +20,14 @@ const Home = ({ collections }: Props) => {
       <div className="mx-auto max-w-screen-2xl p-8">
         <Header />
         <hr className="my-2 border" />
-        <h1>Homepage</h1>
 
         <main>
           <div>
             {collections.map((collection) => (
-              <Link href={`/collections/${collection.slug.current}`}>
+              <Link
+                key={collection._id}
+                href={`/collections/${collection.slug.current}`}
+              >
                 <div>
                   <img
                     className="h-96 w-60 rounded-2xl object-cover"
@@ -43,6 +45,11 @@ const Home = ({ collections }: Props) => {
           </div>
         </main>
       </div>
+      <footer className="fixed inset-x-0 bottom-0 text-center">
+        <div className="">
+          <p>MADE BY THIDKYAR</p>
+        </div>
+      </footer>
     </div>
   )
 }

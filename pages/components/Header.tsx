@@ -5,7 +5,7 @@ function Header() {
   const connectWithMetamask = useMetamask()
   const address = useAddress()
   const disconnectMetamask = useDisconnect()
-
+  console.log('header')
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between">
       <h1 className="animate-ease-in-out cursor-pointer font-bold">
@@ -13,13 +13,16 @@ function Header() {
           <a>nft drop.</a>
         </Link>
       </h1>
-      <div className="space-x-2">
-        {/* <Link href="/collections/random">
-          <button className="animate-ease-in-out h-10 rounded-2xl border-2 bg-gradient-to-br from-cyan-900 to-purple-900 px-4 text-white">
-            Collection
-          </button>
-        </Link> */}
-
+      <div className="flex items-center space-x-2">
+        {address && (
+          <p className="animate-ease-in-out rounded-lg border-2 border-purple-600 p-1 text-purple-900">
+            Logged in as{' '}
+            <span className="font-semibold">
+              {address?.substring(0, 5)}...
+              {address?.substring(address?.length - 5)}
+            </span>
+          </p>
+        )}
         <button
           onClick={() => {
             address ? disconnectMetamask() : connectWithMetamask()
