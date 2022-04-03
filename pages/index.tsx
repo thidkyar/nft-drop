@@ -16,6 +16,12 @@ const Home = ({ collections }: Props) => {
       <Head>
         <title>NFT Drops</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='' />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <div className="to-blue-400[0.35] dark:to-blue-400[0.25] bg-gradient-to-tr from-purple-400/[0.35] dark:from-purple-400/[0.15]">
         <div className="mx-auto flex min-h-screen max-w-7xl flex-col p-8">
@@ -38,7 +44,7 @@ const Home = ({ collections }: Props) => {
           <div className="pt-12 pb-24 md:grid md:grid-cols-4">
             <div className="md:col-span-4 xl:col-span-3 xl:col-start-2">
               <section className="pb-12 lg:pb-16">
-                <h1 className="text-center font-poppins text-3xl font-extralight dark:text-white md:text-left md:text-4xl">
+                <h1 className="font-poppins text-center text-3xl font-extralight dark:text-white md:text-left md:text-4xl">
                   <span className="font-bold text-purple-500">Explore</span> the
                   collections
                 </h1>
