@@ -1,4 +1,6 @@
 module.exports = {
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -6,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'poppins': ['Poppins', 'sans-serif'] 
+        poppins: ['Poppins', 'sans-serif'],
       },
       keyframes: {
         'fade-in-down': {
@@ -25,7 +27,7 @@ module.exports = {
           },
           '100%': {
             transform: 'translateX(0)',
-          }
+          },
         },
         'slide-in-down': {
           '0%': {
@@ -33,7 +35,7 @@ module.exports = {
           },
           '100%': {
             transform: 'translateY(0)',
-          }
+          },
         },
       },
       animation: {

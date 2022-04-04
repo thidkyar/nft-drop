@@ -4,9 +4,9 @@ import { GetServerSideProps } from 'next'
 import { useState, useEffect } from 'react'
 import { sanityClient, urlFor } from '../../sanity'
 import { Collection } from '../../typings'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import toast, { Toaster } from 'react-hot-toast'
-import Footer from '../components/Footer'
+import Footer from '../../components/Footer'
 import {
   PhotographIcon,
   ArrowLeftIcon,

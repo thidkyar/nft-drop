@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
-import { sanityClient, urlFor } from '../../sanity'
-import { Collection } from '../../typings'
+import { sanityClient, urlFor } from '../sanity'
+import { Collection } from '../typings'
 
 interface Props {
   collections: Collection[]
