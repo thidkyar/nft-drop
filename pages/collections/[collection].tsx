@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/outline'
 import Link from 'next/link'
 import Head from 'next/head'
+import Modal from '../../components/Modal'
 
 interface Props {
   collection: Collection
@@ -24,8 +25,10 @@ function Collection({ collection }: Props) {
   const [claimedSupply, setClaimedSupply] = useState<number>(0)
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const [price, setPrice] = useState<String>()
-  const nftDrop = useNFTDrop(collection.address)
+  const [showModal, setShowModal] = useState(false)
   const [loading, setLoading] = useState<boolean>(false)
+  const [txData, setTxData] = useState<any>({})
+  const nftDrop = useNFTDrop(collection.address)
   const address = useAddress()
 
   useEffect(() => {
@@ -65,6 +68,8 @@ function Collection({ collection }: Props) {
         const receipt = transactionData[0].receipt
         const claimedTokenId = transactionData[0].id
         const claimedNFT = await transactionData[0].data()
+        
+        setTxData(claimedNFT.metadata)
 
         toast.success('Succesfully minted!', {
           position: 'bottom-center',
@@ -73,13 +78,15 @@ function Collection({ collection }: Props) {
             color: 'green',
           },
         })
+
         console.log(receipt)
         console.log(claimedTokenId)
         console.log(claimedNFT)
+        setShowModal(true)
       })
       .catch((err) => {
         console.log(err)
-        toast.error('Something went wrong', {
+        toast.error(`${err.message}`, {
           position: 'bottom-center',
           style: {
             background: 'black',
@@ -211,6 +218,11 @@ function Collection({ collection }: Props) {
         <Footer />
       </div>
       <Toaster />
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        txData={txData}
+      />
     </div>
   )
 }
